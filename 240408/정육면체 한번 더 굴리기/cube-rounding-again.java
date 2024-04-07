@@ -33,9 +33,9 @@ public class Main {
 		for(int m=0;m<M;m++) {
 			int nr=dice.r+dr[dice.d];
 			int nc=dice.c+dc[dice.d];
-			if(nr<0||nr>=N||nc<0||nc>N) {
-				dice.r-=dr[dice.d];
-				dice.c-=dc[dice.d];
+			if(nr<0||nr>=N||nc<0||nc>=N) {
+				dice.r+=dr[(dice.d+2)%4];
+				dice.c+=dc[(dice.d+2)%4];
 				dice.d=(dice.d+2)%4;
 			}
 			else {
