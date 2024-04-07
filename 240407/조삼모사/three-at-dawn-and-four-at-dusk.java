@@ -18,24 +18,23 @@ public class Main {
 				map[i][j]=Integer.parseInt(st.nextToken());
 			}
 		}
+		v=new boolean[N];
 		
-		
-		back(0);
+		back(0,0);
 		bw.write(answer+"");
 		bw.close();
 	}
-	static Set<Integer> set=new HashSet();
+	static boolean[] v;
 	static int answer=Integer.MAX_VALUE;
-	public static void back(int idx) {
-		
-		if(set.size()==N/2) {
+	public static void back(int cnt, int idx) {
+		if(cnt==N/2) {
 			int sum=0;
 			for(int i=0;i<N;i++) {
 				for(int j=0;j<N;j++) {
-					if(set.contains(i)&&set.contains(j)) {
+					if(v[i]&&v[j]) {
 						sum+=map[i][j];
 					}
-					else if(!set.contains(i)&&!set.contains(j)) {
+					else if(!v[i]&&!v[j]) {
 						sum-=map[i][j];
 					}
 				}
@@ -43,15 +42,12 @@ public class Main {
 			answer=Math.min(answer, Math.abs(sum));
 			return;
 		}
-		if(N-1-idx<N/2-set.size())return;
+		if(idx==N) return;
 		
-		for(int i=idx;i<N;i++){
-			set.add(i);
-			back(i+1);
-			set.remove(i);
-			back(i+1);
-		}
-		
+		v[idx]=true;
+		back(cnt+1,idx+1);
+		v[idx]=false;
+		back(cnt,idx+1);
 	}
 
 }
