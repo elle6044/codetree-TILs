@@ -44,13 +44,13 @@ public class Main {
 		q.offer(new Point(r,c,dir));
 		v[r][c]=true;
 		
-		while(!q.isEmpty()) {
+		L:while(!q.isEmpty()) {
 			Point p=q.poll();
-			L:for(int d=1;d<=4;d++) {
+			for(int d=1;d<=4;d++) {
 				int nd=(p.d+3*d)%4;
 				int nr=p.r+dr[nd];
 				int nc=p.c+dc[nd];
-				if(nr>=0&&nr<N&&nc>=0&&nc<M&&map[nr][nc]==0) {
+				if(map[nr][nc]==0) {
 					if(!v[nr][nc]) {
 						v[nr][nc]=true;
 						q.offer(new Point(nr,nc,nd));
@@ -62,7 +62,7 @@ public class Main {
 			int nd=(p.d+2)%4;
 			int nr=p.r+dr[nd];
 			int nc=p.c+dc[nd];
-			if(nr>=0&&nr<N&&nc>=0&&nc<M&&map[nr][nc]==0) {
+			if(map[nr][nc]==0) {
 				q.offer(new Point(nr,nc,p.d));
 			}
 		}
