@@ -45,10 +45,13 @@ public class Main {
 		}
 		if(N-1-idx<N/2-set.size())return;
 		
-		set.add(idx);
-		back(idx+1);
-		set.remove(idx);
-		back(idx+1);
+		for(int i=idx;i<N;i++){
+			set.add(i);
+			back(i+1);
+			set.remove(i);
+			back(i+1);
+		}
+		
 	}
 
 }
