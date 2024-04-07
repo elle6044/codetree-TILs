@@ -43,7 +43,7 @@ public class Main {
 			answer=Math.min(answer, Math.abs(sum));
 			return;
 		}
-		if(idx==N)return;
+		if(N-1-idx<N/2-set.size())return;
 		
 		set.add(idx);
 		back(idx+1);
