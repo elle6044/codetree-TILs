@@ -117,6 +117,7 @@ public class Main {
 				}
 				else {
 					bq.offer(new Body(m.r,m.c));
+					bMap[m.r][m.c]++;
 				}
 			}
 		}
