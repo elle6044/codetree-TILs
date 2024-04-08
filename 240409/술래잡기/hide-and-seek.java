@@ -29,7 +29,7 @@ public class Main {
 			st=new StringTokenizer(br.readLine());
 			int r=Integer.parseInt(st.nextToken())-1;
 			int c=Integer.parseInt(st.nextToken())-1;
-			int d=Integer.parseInt(st.nextToken())==1?1:2;
+			int d=Integer.parseInt(st.nextToken());
 			runners.add(new Runner(r,c,d));
 		}
 		
@@ -57,11 +57,9 @@ public class Main {
 	
 	public static int catchRunner() {
 		int cnt=0;
-		int nr=police.r;
-		int nc=police.c;
 		for(int i=0;i<3;i++) {
-			nr+=dr[police.d];
-			nc+=dc[police.d];
+			int nr=police.r+dr[police.d]*i;
+			int nc=police.c+dc[police.d]*i;
 			for(Runner r:runners) {
 				if(r.dead)continue;
 				if(nr==r.r&&nc==r.c&&!tMap[nr][nc]) {
@@ -122,6 +120,7 @@ public class Main {
 	
 	public static void moveRunner() {
 		for(Runner runner:runners) {
+			if(runner.dead)continue;
 			int distance=Math.abs(police.r-runner.r)+Math.abs(police.c-runner.c);
 			if(distance<=3) {
 				int nr=runner.r+dr[runner.d];
@@ -133,7 +132,6 @@ public class Main {
 					}
 				}
 				else {
-					
 					runner.d=(runner.d+2)%4;
 					nr=runner.r+dr[runner.d];
 					nc=runner.c+dc[runner.d];
