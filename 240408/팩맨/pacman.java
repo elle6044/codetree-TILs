@@ -115,6 +115,9 @@ public class Main {
 				if(m.r!=nr||m.c!=nc) {
 					mq.offer(m);
 				}
+				else {
+					bq.offer(new Body(m.r,m.c));
+				}
 			}
 		}
 		
@@ -142,11 +145,16 @@ public class Main {
 		for(int d=0;d<4;d++) {
 			int nr=r+pdr[d];
 			int nc=c+pdc[d];
-			if(nr>=0&&nr<4&&nc>=0&&nc<4&&!v[nr][nc]) {
+			if(nr>=0&&nr<4&&nc>=0&&nc<4) {
 				dir[cnt]=d;
-				v[nr][nc]=true;
-				back(nr,nc,cnt+1,dir,sum+mMap[nr][nc]);
-				v[nr][nc]=false;
+				if(v[nr][nc]) {
+					back(nr,nc,cnt+1,dir,sum);
+				}
+				else {
+					v[nr][nc]=true;
+					back(nr,nc,cnt+1,dir,sum+mMap[nr][nc]);
+					v[nr][nc]=false;
+				}
 			}
 		}
 	}
