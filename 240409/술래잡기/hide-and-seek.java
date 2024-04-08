@@ -65,6 +65,7 @@ public class Main {
 			for(Runner r:runners) {
 				if(nr==r.r&&nc==r.c&&!tMap[nr][nc]) {
 					cnt++;
+					runners.remove(r);
 				}
 			}
 		}
