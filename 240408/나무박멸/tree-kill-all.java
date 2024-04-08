@@ -54,6 +54,7 @@ public class Main {
 	
 	public static int kill() {
 		int[] location=find();
+		if(location[0]==-1) return 0;
 		int r=location[0];
 		int c=location[1];
 		
@@ -84,11 +85,11 @@ public class Main {
 	}
 	
 	public static int[] find() {
-		int[] location= new int[2];
-		int max=-1;
+		int[] location= {-1,-1};
+		int max=0;
 		for(int i=0;i<N;i++) {
 			for(int j=0;j<N;j++) {
-				if(map[i][j]>=0) {
+				if(map[i][j]>0) {
 					int cnt=countKill(i,j);
 					if(max<cnt) {
 						max=cnt;
