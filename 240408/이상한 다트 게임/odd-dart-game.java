@@ -24,8 +24,6 @@ public class Main {
 			}
 		}
 		
-		
-		
 		for(int q=0;q<Q;q++) {
 			st=new StringTokenizer(br.readLine());
 			int x=Integer.parseInt(st.nextToken());
@@ -33,8 +31,11 @@ public class Main {
 			int k=Integer.parseInt(st.nextToken());
 			
 			rotation(x,d,k);
+
 			
 			remove();
+		
+			
 		}
 		
 		int answer=0;
@@ -55,7 +56,7 @@ public class Main {
 		v=new boolean[N][M];
 		for(int i=0;i<N;i++) {
 			for(int j=0;j<M;j++) {
-				if(!v[i][j]) {
+				if(!v[i][j]&&map[i][j]!=-1) {
 					if(bfs(i,j,map[i][j])) {
 						map[i][j]=-1;
 						check=true;
