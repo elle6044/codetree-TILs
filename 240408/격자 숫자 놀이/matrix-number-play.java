@@ -24,11 +24,12 @@ public class Main {
 		
 		int answer=0;
 		while(true) {
-			changeMap();
-			answer++;
 			if(R<map.length&&C<map[0].length&&map[R][C]==K) {
 				break;
 			}
+			changeMap();
+			answer++;
+			
 			if(answer==101) {
 				answer=-1;
 				break;
