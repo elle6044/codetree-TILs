@@ -86,7 +86,7 @@ public class Main {
 			map[i][0]=map[i+1][0];
 		}
 		
-		int temp1=map[0][N-1];
+		int temp1=map[0][M-1];
 		for(int j=0;j<M-1;j++) {
 			map[N-1][j]=map[N-1][j+1];
 		}
