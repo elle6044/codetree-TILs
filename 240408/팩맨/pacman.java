@@ -82,7 +82,7 @@ public class Main {
 		for(int i=0;i<size;i++) {
 			Body b=bq.poll();
 			b.time--;
-			if(b.time>0) {
+			if(b.time>=0) {
 				bq.offer(b);
 			}
 			else {
@@ -106,18 +106,17 @@ public class Main {
 		for(int d:maxDir) {
 			nr+=pdr[d];
 			nc+=pdc[d];
-			bMap[nr][nc]+=mMap[nr][nc];
-			mMap[nr][nc]=0;
-			
+		
 			int size=mq.size();
 			for(int i=0;i<size;i++) {
 				Monster m=mq.poll();
-				if(m.r!=nr||m.c!=nc) {
-					mq.offer(m);
+				if(m.r==nr&&m.c==nc) {
+					bq.offer(new Body(m.r,m.c));
+					mMap[nr][nc]--;
+					bMap[nr][nc]++;
 				}
 				else {
-					bq.offer(new Body(m.r,m.c));
-					bMap[m.r][m.c]++;
+					mq.offer(m);
 				}
 			}
 		}
