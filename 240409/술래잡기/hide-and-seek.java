@@ -63,9 +63,10 @@ public class Main {
 			nr+=dr[police.d];
 			nc+=dc[police.d];
 			for(Runner r:runners) {
+				if(r.dead)continue;
 				if(nr==r.r&&nc==r.c&&!tMap[nr][nc]) {
 					cnt++;
-					runners.remove(r);
+					r.dead=true;
 				}
 			}
 		}
@@ -150,10 +151,12 @@ public class Main {
 	
 	static class Runner{
 		int r,c,d;
+		boolean dead;
 		public Runner(int r, int c, int d) {
 			this.r=r;
 			this.c=c;
 			this.d=d;
+			this.dead=false;
 		}
 	}
 	
