@@ -11,7 +11,7 @@ public class Main {
 	static int[][] map;
 	static int[][] plus;
 	
-	static ArrayList<Virus> viruses=new ArrayList<>();
+	static PriorityQueue<Virus> viruses=new PriorityQueue();
 	static ArrayList<Virus> deads=new ArrayList<>();
 
 	public static void main(String[] args) throws Exception{
@@ -47,7 +47,6 @@ public class Main {
 		
 		
 		for(int k=0;k<K;k++) {
-			viruses.sort(Comparator.naturalOrder());
 			eatFood();
 			
 			chageFood();
@@ -74,20 +73,22 @@ public class Main {
 	}
 	
 	public static void spreadVirus() {
-		int size=viruses.size();
-		for(int i=0;i<size;i++) {
-			Virus v=viruses.get(i);
-			if(v.age<=4)break;
+		List<Virus> temp=new ArrayList();
+		while(!viruses.isEmpty()) {
+			Virus v=viruses.poll();
 			if(v.age%5==0) {
 				for(int d=0;d<8;d++) {
 					int nr=v.r+dr[d];
 					int nc=v.c+dc[d];
 					if(nr>=0&&nr<N&&nc>=0&&nc<N) {
-						viruses.add(new Virus(nr,nc,1));
+						temp.add(new Virus(nr,nc,1));
 					}
 				}
 			}
+			temp.add(v);
 		}
+		
+		viruses.addAll(temp);
 	}
 	
 	public static void chageFood() {
@@ -98,18 +99,20 @@ public class Main {
 	}
 	
 	public static void eatFood() {
-		int size=viruses.size();
-		for(int i=size-1;i>=0;i--) {
-			Virus v=viruses.get(i);
-			
+		List<Virus> temp=new ArrayList();
+		while(!viruses.isEmpty()) {
+			Virus v=viruses.poll();
 			if(v.age<=map[v.r][v.c]) {
 				map[v.r][v.c]-=v.age;
 				v.age++;
+				temp.add(v);
 			}
 			else {
-				deads.add(viruses.remove(i));
+				deads.add(v);
 			}
 		}
+		
+		viruses.addAll(temp);
 	}
 	
 	
@@ -125,8 +128,7 @@ public class Main {
 		}
 		@Override
 		public int compareTo(Virus o) {
-			return o.age-this.age;
+			return this.age-o.age;
 		}
 	}
-
 }
