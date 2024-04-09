@@ -50,6 +50,11 @@ public class Main {
 			if(isEnd()) break;
 			answer++;
 			
+//			for(int i=1;i<mans.size();i++) {
+//				Man m=mans.get(i);
+//				System.out.println(m.r+" "+m.c+" "+m.end);
+//			}
+//			System.out.println();
 		}
 		
 		bw.write(answer+"");
@@ -78,13 +83,13 @@ public class Main {
 	public static void addMan(int num) {
 		Mart mart=marts.get(num);
 		v=new boolean[N][N];
-		Queue<Point> q=new ArrayDeque();
+		PriorityQueue<Point2> q=new PriorityQueue();
 		int r=mart.r;
 		int c=mart.c;
 		v[r][c]=true;
-		q.offer(new Point(r,c,0));
+		q.offer(new Point2(r,c,0));
 		while(!q.isEmpty()) {
-			Point p=q.poll();
+			Point2 p=q.poll();
 			if(map[p.r][p.c]==1) {
 				mans.add(new Man(num,p.r,p.c));
 				cant[p.r][p.c]=true;
@@ -96,7 +101,7 @@ public class Main {
 				if(nr>=0&&nr<N&&nc>=0&&nc<N&&
 						!cant[nr][nc]&&!v[nr][nc]) {
 					v[nr][nc]=true;
-					q.offer(new Point(nr,nc,0));
+					q.offer(new Point2(nr,nc,p.cnt+1));
 				}
 			}
 		}
@@ -174,6 +179,19 @@ public class Main {
 			this.r=r;
 			this.c=c;
 			this.d=d;
+		}
+	}
+	
+	static class Point2 implements Comparable<Point2>{
+		int r,c,cnt;
+		public Point2(int r, int c, int cnt) {
+			this.r=r;
+			this.c=c;
+			this.cnt=cnt;
+		}
+		@Override
+		public int compareTo(Point2 o) {
+			return this.cnt==o.cnt?this.r==o.r?this.c-o.c:this.r-o.r:this.cnt-o.cnt;
 		}
 	}
 
