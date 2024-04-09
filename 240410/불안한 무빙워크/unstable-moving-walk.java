@@ -61,7 +61,7 @@ public class Main {
 			now--;
 			if(now<0) now=2*N-1;
 			
-			if(v[now]&&map[next]>0) {
+			if(v[now]&&!v[next]&&map[next]>0) {
 				v[now]=false;
 				map[next]--;
 				if(next!=idx2) {
@@ -78,6 +78,8 @@ public class Main {
 		
 		int idx2=(idx+N-1)%(2*N);
 		
-		if(v[idx2]) v[idx2]=false;
+		if(v[idx2]) {
+			v[idx2]=false;
+		}
 	}
 }
