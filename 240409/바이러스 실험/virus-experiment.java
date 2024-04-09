@@ -12,6 +12,7 @@ public class Main {
 	static int[][] plus;
 	
 	static ArrayList<Virus> viruses=new ArrayList<>();
+	static ArrayList<Virus> deads=new ArrayList<>();
 
 	public static void main(String[] args) throws Exception{
 		st=new StringTokenizer(br.readLine());
@@ -54,6 +55,8 @@ public class Main {
 			spreadVirus();
 			
 			plusFood();
+			
+//			System.out.println(k);
 		}
 		
 		int answer=viruses.size();
@@ -74,6 +77,7 @@ public class Main {
 		int size=viruses.size();
 		for(int i=0;i<size;i++) {
 			Virus v=viruses.get(i);
+			if(v.age<=4)break;
 			if(v.age%5==0) {
 				for(int d=0;d<8;d++) {
 					int nr=v.r+dr[d];
@@ -84,19 +88,13 @@ public class Main {
 				}
 			}
 		}
-		
 	}
 	
 	public static void chageFood() {
-		int size=viruses.size();
-		for(int i=size-1;i>=0;i--) {
-			Virus v=viruses.get(i);
-			
-			if(v.dead) {
-				map[v.r][v.c]+=v.age/2;
-				viruses.remove(i);
-			}
+		for(Virus v:deads) {
+			map[v.r][v.c]+=v.age/2;
 		}
+		deads.clear();
 	}
 	
 	public static void eatFood() {
@@ -109,7 +107,7 @@ public class Main {
 				v.age++;
 			}
 			else {
-				v.dead=true;
+				deads.add(viruses.remove(i));
 			}
 		}
 	}
@@ -120,12 +118,10 @@ public class Main {
 	static int[] dc= {0,1,1,1,0,-1,-1,-1,};
 	static class Virus implements Comparable<Virus>{
 		int r,c,age;
-		boolean dead;
 		public Virus(int r, int c, int age) {
 			this.r=r;
 			this.c=c;
 			this.age=age;
-			this.dead=false;
 		}
 		@Override
 		public int compareTo(Virus o) {
