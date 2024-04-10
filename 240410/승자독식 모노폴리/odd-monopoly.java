@@ -40,7 +40,6 @@ public class Main {
 			int d=Integer.parseInt(st.nextToken())-1;
 			Player p=temp.poll();
 			p.d=d;
-			
 			players.offer(p);
 		}
 		
@@ -52,23 +51,25 @@ public class Main {
 					dir[i][j][d]=Integer.parseInt(st.nextToken())-1;
 				}
 			}
+			
 		}
 		
-		int answer=0;
+		int answer=1;
 		while(true) {
-			if(players.size()==1) break;;
 			
 			move();
 			time();
 			eat();
 			
-			answer++;
+			if(players.size()==1) break;
 			
-
+			answer++;
 			if(answer>=1000) {
 				answer=-1;
 				break;
 			}
+			
+			
 		}
 		bw.write(answer+"");
 		bw.close();
@@ -93,6 +94,7 @@ public class Main {
 			Player p=players.poll();
 			
 			v[p.r][p.c]=K;
+			map[p.r][p.c]=p.num;
 			temp.add(p);
 		}
 		players.addAll(temp);
