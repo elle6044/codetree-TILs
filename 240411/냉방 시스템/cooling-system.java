@@ -64,12 +64,17 @@ public class Main {
 		int answer=0;
 		while(true) {
 			if(isEnd()) break;
+			if(answer>=100) {
+				answer=-1;
+				break;
+			}
 			
 			workAircon();
 			
 			changeCool();
 			
 			changeOut();
+			
 			answer++;
 		}
 
