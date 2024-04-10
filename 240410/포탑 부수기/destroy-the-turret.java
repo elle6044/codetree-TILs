@@ -33,12 +33,15 @@ public class Main {
 		
 		for(int k=1;k<=K;k++) {
 			play(k);
+			
+			
+//			for(int i=0;i<N;i++) {
+//				System.out.println(Arrays.toString(map[i]));
+//			}
 		}
 		
 		int answer=getAnswer();
-//		for(int i=0;i<N;i++) {
-//			System.out.println(Arrays.toString(map[i]));
-//		}
+		
 		
 		bw.write(answer+"");
 		bw.close();
@@ -119,7 +122,6 @@ public class Main {
 			int idx=canon.r*M+canon.c;
 			if(set.contains(idx)) {
 				canon.p-=attack.p/2;
-//				map[canon.r][canon.c]-=attack.p/2;
 			}
 			else {
 				if(idx!=r*M+c&&idx!=attack.r*M+attack.c) {
@@ -134,7 +136,6 @@ public class Main {
 		v=new boolean[N][M];
 		int r=attack.r;
 		int c=attack.c;
-		
 		Queue<Point> q=new ArrayDeque();
 		q.offer(new Point(r,c));
 		v[r][c]=true;
@@ -145,6 +146,7 @@ public class Main {
 				p.s.pop();
 				
 				for(Canon canon:canons) {
+					
 					int idx=canon.r*M+canon.c;
 					if(p.s.contains(idx)) {
 						canon.p-=attack.p/2;
@@ -159,17 +161,18 @@ public class Main {
 				
 				return true;
 			}
+			
 			for(int d=0;d<4;d++) {
 				int nr=(p.r+dr[d]+N)%N;
 				int nc=(p.c+dc[d]+M)%M;
 				
-				if(map[nr][nc]>0) {
+				if(map[nr][nc]>0&&!v[nr][nc]) {
 					Point np=new Point(nr,nc);
 					np.s.addAll(p.s);
 					np.s.push(nr*M+nc);
 					q.offer(np);
+					v[nr][nc]=true;
 				}
-				
 			}
 		}
 		return false;
