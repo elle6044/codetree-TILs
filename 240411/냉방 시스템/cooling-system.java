@@ -143,6 +143,7 @@ public class Main {
 		v[air.r+dr[air.d]][air.c+dc[air.d]]=true;
 		while(!q.isEmpty()) {
 			Wind w=q.poll();
+			if(w.cnt==0)continue;
 			coolMap[w.r][w.c]+=w.cnt;
 			
 			int nr=w.r+dr[air.d];
@@ -167,9 +168,7 @@ public class Main {
 				int nc1=w.c+dc[(air.d+updown[i])%4];
 				int nr2=w.r+dr[(air.d+updown[i])%4]+dr[air.d];
 				int nc2=w.c+dc[(air.d+updown[i])%4]+dc[air.d];
-				
-//				System.out.println(w.r+" "+w.c+" -> "+nr1+" "+nc1+" -> "+nr2+" "+nc2);
-				
+								
 				if(nr2>=0&&nr2<N&&nc2>=0&&nc2<N&&!v[nr2][nc2]) {
 					boolean check=true;
 					for(Wall wall:walls) {
