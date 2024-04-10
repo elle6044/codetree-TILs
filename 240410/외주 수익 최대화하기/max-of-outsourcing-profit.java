@@ -9,39 +9,38 @@ public class Main {
 	
 	static int N;
 	
+	static int[] dp;
 	static int[] time;
-	static int[] money;
+	static int[] price;
 	
 	public static void main(String[] args) throws Exception {
 		N=Integer.parseInt(br.readLine());
 		
-		time=new int[N];
-		money=new int[N];
+		dp=new int[N+2];
+		time=new int[N+2];
+		price=new int[N+2];
 		
-		for(int i=0;i<N;i++) {
+		for(int i=1;i<=N;i++) {
 			st=new StringTokenizer(br.readLine());
 			int t=Integer.parseInt(st.nextToken());
 			int p=Integer.parseInt(st.nextToken());
+			
 			time[i]=t;
-			money[i]=p;
+			price[i]=p;
 		}
 		
-		back(0,0);
+		for(int i=1;i<=N+1;i++) {
+			int et=i+time[i];
+			
+			dp[i]=Math.max(dp[i], dp[i-1]);
+			
+			if(et<=N+1) {
+				dp[et]=Math.max(dp[et], dp[i]+price[i]);
+			}
+		}
 		
-		bw.write(answer+"");
+		
+		bw.write(dp[N+1]+"");
 		bw.close();
-	}
-
-	static int answer=0;
-	public static void back(int t, int sum) {
-		if(t==N) {
-			answer=Math.max(answer, sum);
-			return;
-		}
-		
-		if(t+time[t]<=N) {
-			back(t+time[t],sum+money[t]);
-		}
-		back(t+1,sum);
 	}
 }
