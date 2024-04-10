@@ -12,19 +12,20 @@ public class Main {
 	static int[] dp;
 	public static void main(String[] args) throws Exception {
 		N=Integer.parseInt(br.readLine());
-		dp=new int[N+1];
+		dp=new int[N+2];
 		
-		for(int i=0;i<N;i++) {
+		for(int i=1;i<=N;i++) {
 			st=new StringTokenizer(br.readLine());
 			int t=Integer.parseInt(st.nextToken());
 			int p=Integer.parseInt(st.nextToken());
 			
-			if(i+t<=N) {
+			dp[i]=Math.max(dp[i], dp[i-1]);
+			
+			if(i+t<=N+1) {
 				dp[i+t]=Math.max(dp[i+t], dp[i]+p);
 			}
 		}
-		
-		bw.write(dp[N]+"");
+		bw.write(dp[N+1]+"");
 		bw.close();
 	}
 
