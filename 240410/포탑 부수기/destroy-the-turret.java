@@ -34,6 +34,9 @@ public class Main {
 		for(int k=1;k<=K;k++) {
 			play(k);
 			
+			if(isEnd()) {
+				break;
+			}
 			
 //			for(int i=0;i<N;i++) {
 //				System.out.println(Arrays.toString(map[i]));
@@ -45,6 +48,13 @@ public class Main {
 		
 		bw.write(answer+"");
 		bw.close();
+	}
+	
+	public static boolean isEnd() {
+		if(canons.size()==1) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static int getAnswer() {
