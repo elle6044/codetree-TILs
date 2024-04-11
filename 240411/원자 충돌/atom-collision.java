@@ -31,6 +31,8 @@ public class Main {
 			
 			moveAtom();
 			
+
+			
 			plusAtom();
 		}
 		
@@ -138,8 +140,8 @@ public class Main {
 			Atom a=atoms.poll();
 			int nr=a.r+dr[a.d]*a.s;
 			int nc=a.c+dc[a.d]*a.s;
-			nr=nr>=0?nr%N:nr%N+N;
-			nc=nc>=0?nc%N:nc%N+N;
+			nr=nr>=0?nr%N:(nr%N+N)%N;
+			nc=nc>=0?nc%N:(nc%N+N)%N;
 			
 			a.r=nr;
 			a.c=nc;
