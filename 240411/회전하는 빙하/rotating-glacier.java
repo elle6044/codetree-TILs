@@ -37,8 +37,6 @@ public class Main {
 			change();
 		}
 
-		
-		
 		int[] answer=getAnswer();
 		bw.write(answer[0]+"\n"+answer[1]);
 		bw.close();
@@ -113,17 +111,35 @@ public class Main {
 		temp=new int[msize][msize];
 		for(int i=0;i<msize;i+=size) {
 			for(int j=0;j<msize;j+=size) {
-				for(int i2=0;i2<size;i2+=size/2) {
-					for(int j2=0;j2<size;j2+=size/2) {
-						for(int i3=0;i3<size/2;i3++) {
-							for(int j3=0;j3<size/2;j3++) {
-								int nr=i+i2;
-								int nc=j+j2;
-								temp[i+j2+i3][j+(size-1-i2)-(size/2-1-j3)]=map[nr+i3][nc+j3];
-							}
-						}
-					}
-				}
+				int n=size;
+				int hn=size/2;
+				// 1번 그룹을 2번 위치로 이동
+		        for (int i2 = i; i2 < i+hn; i2++) {
+		            for (int j2 = j; j2 <j+ hn; j2++) {
+		                temp[i2][j2 + hn] = map[i2][j2];
+		            }
+		        }
+
+		        // 2번 그룹을 3번 위치로 이동
+		        for (int i2 = i; i2 <i+ hn; i2++) {
+		            for (int j2 =j+ hn; j2 <j+n; j2++) {
+		                temp[i2 + hn][j2] = map[i2][j2];
+		            }
+		        }
+
+		        // 3번 그룹을 4번 위치로 이동
+		        for (int i2 = i+hn; i2 <i+ n; i2++) {
+		            for (int j2 =j+ hn; j2 <j+n; j2++) {
+		                temp[i2][j2 - hn] = map[i2][j2];
+		            }
+		        }
+
+		        // 4번 그룹을 1번 위치로 이동
+		        for (int i2 = i+hn; i2 <i+ n; i2++) {
+		            for (int j2 = j; j2 <j+ hn; j2++) {
+		                temp[i2 - hn][j2] = map[i2][j2];
+		            }
+		        }
 			}
 		}
 		
