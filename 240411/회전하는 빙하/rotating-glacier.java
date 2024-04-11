@@ -113,28 +113,24 @@ public class Main {
 			for(int j=0;j<msize;j+=size) {
 				int n=size;
 				int hn=size/2;
-				// 1번 그룹을 2번 위치로 이동
 		        for (int i2 = i; i2 < i+hn; i2++) {
 		            for (int j2 = j; j2 <j+ hn; j2++) {
 		                temp[i2][j2 + hn] = map[i2][j2];
 		            }
 		        }
 
-		        // 2번 그룹을 3번 위치로 이동
 		        for (int i2 = i; i2 <i+ hn; i2++) {
 		            for (int j2 =j+ hn; j2 <j+n; j2++) {
 		                temp[i2 + hn][j2] = map[i2][j2];
 		            }
 		        }
 
-		        // 3번 그룹을 4번 위치로 이동
 		        for (int i2 = i+hn; i2 <i+ n; i2++) {
 		            for (int j2 =j+ hn; j2 <j+n; j2++) {
 		                temp[i2][j2 - hn] = map[i2][j2];
 		            }
 		        }
 
-		        // 4번 그룹을 1번 위치로 이동
 		        for (int i2 = i+hn; i2 <i+ n; i2++) {
 		            for (int j2 = j; j2 <j+ hn; j2++) {
 		                temp[i2 - hn][j2] = map[i2][j2];
