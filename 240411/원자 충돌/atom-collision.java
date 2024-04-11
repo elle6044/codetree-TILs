@@ -28,11 +28,7 @@ public class Main {
 		
 		for(int k=0;k<K;k++) {
 			if(isEnd()) break;
-			
 			moveAtom();
-			
-
-			
 			plusAtom();
 		}
 		
@@ -140,8 +136,8 @@ public class Main {
 			Atom a=atoms.poll();
 			int nr=a.r+dr[a.d]*a.s;
 			int nc=a.c+dc[a.d]*a.s;
-			nr=nr>=0?nr%N:(nr%N+N)%N;
-			nc=nc>=0?nc%N:(nc%N+N)%N;
+			nr=(nr%N+N)%N;
+			nc=(nc%N+N)%N;
 			
 			a.r=nr;
 			a.c=nc;
