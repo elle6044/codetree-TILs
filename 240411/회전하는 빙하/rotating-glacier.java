@@ -30,7 +30,10 @@ public class Main {
 		st=new StringTokenizer(br.readLine());
 		for(int q=0;q<Q;q++) {
 			int level=Integer.parseInt(st.nextToken());
-			rotation((int)Math.pow(2, level));
+			if(level!=0) {
+				rotation((int)Math.pow(2, level));
+			}
+
 			change();
 		}
 
@@ -110,11 +113,15 @@ public class Main {
 		temp=new int[msize][msize];
 		for(int i=0;i<msize;i+=size) {
 			for(int j=0;j<msize;j+=size) {
-				for(int i2=0;i2<size;i2++) {
-					for(int j2=0;j2<size;j2++) {
-						int nr=i+i2;
-						int nc=j+j2;
-						temp[i+j2][j+(size-1-i2)]=map[nr][nc];
+				for(int i2=0;i2<size;i2+=size/2) {
+					for(int j2=0;j2<size;j2+=size/2) {
+						for(int i3=0;i3<size/2;i3++) {
+							for(int j3=0;j3<size/2;j3++) {
+								int nr=i+i2;
+								int nc=j+j2;
+								temp[i+j2+i3][j+(size-1-i2)-(size/2-1-j3)]=map[nr+i3][nc+j3];
+							}
+						}
 					}
 				}
 			}
