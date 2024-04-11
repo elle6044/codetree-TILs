@@ -25,6 +25,8 @@ public class Main {
 		Police police=new Police(0,0,start.d,map[0][0]);
 		map[0][0]=-1;
 		
+		answer=Math.max(answer, police.p);
+		
 		back(1, map, mans, police);
 		
 		bw.write(answer+"");
@@ -69,9 +71,15 @@ public class Main {
 				tpolice.d=target.d;
 				tpolice.p+=target.num;
 				
+				
+				answer=Math.max(answer, tpolice.p);
 				back(cnt+1, tmap, tmans, tpolice);
+				
+				target.dead=false;
+				tmap[nr][nc]=0;
+				tmap[tpolice.r][tpolice.c]=-1;
 			}
-			answer=Math.max(answer, police.p);
+			
 		}
 		
 	}
