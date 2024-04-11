@@ -27,13 +27,11 @@ public class Main {
 		}
 		
 		for(int k=0;k<K;k++) {
-			
+			if(isEnd()) break;
 			
 			moveAtom();
 			
 			plusAtom();
-			
-			if(isEnd()) break;
 		}
 		
 		int answer=getAnswer();
