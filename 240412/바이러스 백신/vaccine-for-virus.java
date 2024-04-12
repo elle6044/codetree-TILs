@@ -48,6 +48,16 @@ public class Main {
 		}
 		
 		while(!q.isEmpty()) {
+			boolean check=true;
+			for(int i=0;i<N;i++) {
+				for(int j=0;j<N;j++) {
+					if(map[i][j]==0&&!v[i][j]) {
+						check=false;
+					}
+				}
+			}
+			if(check) break;
+			
 			int size=q.size();
 			for(int s=0;s<size;s++) {
 				Point p=q.poll();
@@ -61,17 +71,9 @@ public class Main {
 				}
 			}
 			time++;
-			boolean check=true;
-			for(int i=0;i<N;i++) {
-				for(int j=0;j<N;j++) {
-					if(map[i][j]==0&&!v[i][j]) {
-						check=false;
-					}
-				}
-			}
-			if(check) break;
+			
 		}
-//		time--;
+
 		for(int i=0;i<N;i++) {
 			for(int j=0;j<N;j++) {
 				if(map[i][j]==0&&!v[i][j]) {
