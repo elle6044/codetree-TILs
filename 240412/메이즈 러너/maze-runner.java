@@ -71,36 +71,35 @@ public class Main {
 	}
 	
 	static void rotateMap() {
-		List<Player> temp=new ArrayList();
-		Player target=null;
 		int size=N;
+		int er=0;
+		int ec=0;
+		int sr=0;
+		int sc=0;
 		
-		while(!players.isEmpty()) {
-			Player p=players.poll();
-			temp.add(p);
-			if(p.out) continue;
-			
-			int nsize=Math.max(Math.abs(exit.r-p.r), Math.abs(exit.c-p.c))+1;
-			if(nsize<size) {
-				target=p;
-				size=nsize;
+		L:for(int s=2;s<=N;s++) {
+			for(int i=0;i<=N-s;i++) {
+				for(int j=0;j<=N-s;j++) {
+					int sr2=i;
+					int sc2=j;
+					int er2=i+s-1;
+					int ec2=j+s-1;
+					if(exit.r>=sr2&&exit.r<=er2&&exit.c>=sc2&&exit.c<=ec2) {
+						for(Player p:players) {
+							if(p.out)continue;
+							if(p.r>=sr2&&p.r<=er2&&p.c>=sc2&&p.c<=ec2) {
+								size=s;
+								sr=sr2;
+								sc=sc2;
+								er=er2;
+								ec=ec2;
+								break L;
+							}
+						}
+					}
+					
+				}
 			}
-			
-		}
-		players.addAll(temp);
-		
-		int er=Math.max(exit.r, target.r);
-		int ec=Math.max(exit.c, target.c);
-		int sr=er-(size-1);
-		int sc=ec-(size-1);
-		
-		if(sr<0) {
-			er-=sr;
-			sr-=sr;
-		}
-		if(sc<0) {
-			ec-=sc;
-			sc-=sc;
 		}
 		
 		int[][] tmap=new int[size][size];
@@ -155,8 +154,6 @@ public class Main {
 				}
 			}
 			if(p.r==exit.r&&p.c==exit.c) p.out=true;
-			
-			
 		}
 		players.addAll(temp);
 	}
@@ -172,7 +169,7 @@ public class Main {
 		}
 		@Override
 		public int compareTo(Player o) {
-			return this.r==o.c?this.c-o.c:this.r-o.r;
+			return this.r==o.r?this.c-o.c:this.r-o.r;
 		}
 	}
 	
