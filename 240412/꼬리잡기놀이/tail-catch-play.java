@@ -54,7 +54,7 @@ public class Main {
 	static int answer=0;
 	
 	static void shotBall(int round) {
-		int dir=round/N;
+		int dir=(round/N)%4;
 		int r=0;
 		int c=0;
 		if(dir==0) {
