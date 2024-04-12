@@ -8,7 +8,7 @@ public class Main {
 	static int N,M,K;
 	static int[][] map;
 	
-	static PriorityQueue<Player> players=new PriorityQueue();
+	static List<Player> players=new ArrayList();
 	
 	static Player exit;
 
@@ -30,7 +30,7 @@ public class Main {
 			st=new StringTokenizer(br.readLine());
 			int r=Integer.parseInt(st.nextToken())-1;
 			int c=Integer.parseInt(st.nextToken())-1;
-			players.offer(new Player(r,c));
+			players.add(new Player(r,c));
 		}
 		
 		st=new StringTokenizer(br.readLine());
@@ -133,10 +133,7 @@ public class Main {
 	}
 	
 	static void movePlayer() {
-		List<Player> temp=new ArrayList();
-		while(!players.isEmpty()) {
-			Player p=players.poll();
-			temp.add(p);
+		for(Player p:players) {
 			if(p.out) continue;
 			
 			int dist=Math.abs(exit.r-p.r)+Math.abs(exit.c-p.c);
@@ -155,10 +152,9 @@ public class Main {
 			}
 			if(p.r==exit.r&&p.c==exit.c) p.out=true;
 		}
-		players.addAll(temp);
 	}
 	
-	static class Player implements Comparable<Player>{
+	static class Player{
 		int r,c,cnt;
 		boolean out;
 		public Player(int r, int c) {
@@ -166,10 +162,6 @@ public class Main {
 			this.c=c;
 			this.cnt=0;
 			this.out=false;
-		}
-		@Override
-		public int compareTo(Player o) {
-			return this.r==o.r?this.c-o.c:this.r-o.r;
 		}
 	}
 	
