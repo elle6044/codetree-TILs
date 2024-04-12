@@ -34,11 +34,15 @@ public class Main {
 		
 		makeTeam();
 		
+
+		
 		for(int k=0;k<K;k++) {
 			
 			moveTeam();
 			
 			shotBall(k);
+			
+
 		}
 		
 
@@ -106,6 +110,7 @@ public class Main {
 	}
 	
 	static void moveTeam() {
+		v=new boolean[N][N];
 		for(int m=1;m<=M;m++) {
 			Team t=teams[m];
 			if(t.head==1) {
@@ -117,8 +122,8 @@ public class Main {
 						map[back.r][back.c]=4;
 						tmap[back.r][back.c]=0;
 					}
-//					map[fore.r][fore.c]=back.num;
-//					tmap[fore.r][fore.c]=m;
+					
+					v[fore.r][fore.c]=true;
 					
 					back.r=fore.r;
 					back.c=fore.c;
@@ -127,13 +132,10 @@ public class Main {
 				for(int d=0;d<4;d++) {
 					int nr=head.r+dr[d];
 					int nc=head.c+dc[d];
-					if(nr>=0&&nr<N&&nc>=0&&nc<N&&
-							(map[nr][nc]==4||map[nr][nc]==3)) {
+					if(nr>=0&&nr<N&&nc>=0&&nc<N&&!v[nr][nc]&&
+							map[nr][nc]!=0) {
 						head.r=nr;
 						head.c=nc;
-						
-						map[nr][nc]=head.num;
-						tmap[nr][nc]=m;
 						
 						break;
 					}
@@ -148,8 +150,8 @@ public class Main {
 						map[back.r][back.c]=4;
 						tmap[back.r][back.c]=0;
 					}
-//					map[fore.r][fore.c]=back.num;
-//					tmap[fore.r][fore.c]=m;
+					
+					v[fore.r][fore.c]=true;
 					
 					back.r=fore.r;
 					back.c=fore.c;
@@ -162,9 +164,6 @@ public class Main {
 							(map[nr][nc]==4||map[nr][nc]==1)) {
 						head.r=nr;
 						head.c=nc;
-						
-						map[nr][nc]=head.num;
-						tmap[nr][nc]=m;
 						
 						break;
 					}
@@ -194,7 +193,7 @@ public class Main {
 	
 	static void bfsTeam(int r, int c, int num) {
 		Queue<Man> q=new ArrayDeque();
-		q.offer(new Man(num,r,c));
+		q.offer(new Man(map[r][c],r,c));
 		v[r][c]=true;
 		tmap[r][c]=num;
 		Team t=teams[num];
