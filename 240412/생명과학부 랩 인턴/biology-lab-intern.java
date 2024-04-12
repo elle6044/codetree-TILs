@@ -32,13 +32,15 @@ public class Main {
 		for(int m=0;m<M;m++) {
 			answer+=killTarget(m);
 			
+//			for(int i=0;i<N;i++) {
+//				System.out.println(Arrays.toString(map[i]));
+//			}
+//			System.out.println(answer);
+			
 			moveTarget();
 			
-//			break;
 		}
-//		for(int i=0;i<N;i++) {
-//			System.out.println(Arrays.toString(map[i]));
-//		}
+		
 		
 		bw.write(answer+"");
 		bw.close();
@@ -67,12 +69,21 @@ public class Main {
 			}
 			map[t.r][t.c]=0;
 			
+			t.r=r;
+			t.c=c;
+		}
+		
+		for(Integer num:targets.keySet()) {
+			Target t=targets.get(num);
+			if(t.dead) continue;
+			
+			int r=t.r;
+			int c=t.c;
+			
 			if(map[r][c]>0) {
 				targets.get(map[r][c]).dead=true;
 			}
-			map[r][c]=num;
-			t.r=r;
-			t.c=c;
+			map[r][c]=t.b;
 		}
 	}
 	
