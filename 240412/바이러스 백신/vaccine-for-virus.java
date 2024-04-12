@@ -9,6 +9,7 @@ public class Main {
 	static int[][]map;
 	static boolean[][]v;
 	static List<Hospital> hospitals=new ArrayList();
+	static int zeroCnt=0;
 
 	public static void main(String[] args) throws Exception{
 		st=new StringTokenizer(br.readLine());
@@ -23,11 +24,17 @@ public class Main {
 				if(input==2) {
 					hospitals.add(new Hospital(i,j));
 				}
+				else if(input==0) zeroCnt++;
 			}
 		}
 		
+		if(zeroCnt==0) {
+			answer=0;
+		}
+		else {
+			back(0,0,new int[M]);
+		}
 		
-		back(0,0,new int[M]);
 		
 		if(answer==Integer.MAX_VALUE) answer=-1;
 		
@@ -39,6 +46,7 @@ public class Main {
 	
 	static int bfs(int[] array) {
 		int time=0;
+		int cnt=0;
 		v=new boolean[N][N];
 		Queue<Point> q=new ArrayDeque();
 		for(int i=0;i<M;i++) {
@@ -49,14 +57,6 @@ public class Main {
 		
 		while(!q.isEmpty()) {
 			boolean check=true;
-			for(int i=0;i<N;i++) {
-				for(int j=0;j<N;j++) {
-					if(map[i][j]==0&&!v[i][j]) {
-						check=false;
-					}
-				}
-			}
-			if(check) break;
 			
 			int size=q.size();
 			for(int s=0;s<size;s++) {
@@ -67,20 +67,17 @@ public class Main {
 					if(nr>=0&&nr<N&&nc>=0&&nc<N&&!v[nr][nc]&&map[nr][nc]!=1) {
 						q.offer(new Point(nr,nc));
 						v[nr][nc]=true;
+						if(map[nr][nc]==0) cnt++;
 					}
 				}
 			}
 			time++;
 			
+			if(cnt==zeroCnt) break;
+			
 		}
 
-		for(int i=0;i<N;i++) {
-			for(int j=0;j<N;j++) {
-				if(map[i][j]==0&&!v[i][j]) {
-					time=Integer.MAX_VALUE;
-				}
-			}
-		}
+		if(cnt!=zeroCnt) time=Integer.MAX_VALUE;
 		
 		return time;
 	}
