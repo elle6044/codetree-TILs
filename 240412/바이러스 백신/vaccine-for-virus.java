@@ -54,15 +54,24 @@ public class Main {
 				for(int d=0;d<4;d++) {
 					int nr=p.r+dr[d];
 					int nc=p.c+dc[d];
-					if(nr>=0&&nr<N&&nc>=0&&nc<N&&!v[nr][nc]&&map[nr][nc]==0) {
+					if(nr>=0&&nr<N&&nc>=0&&nc<N&&!v[nr][nc]&&map[nr][nc]!=1) {
 						q.offer(new Point(nr,nc));
 						v[nr][nc]=true;
 					}
 				}
 			}
 			time++;
+			boolean check=true;
+			for(int i=0;i<N;i++) {
+				for(int j=0;j<N;j++) {
+					if(map[i][j]==0&&!v[i][j]) {
+						check=false;
+					}
+				}
+			}
+			if(check) break;
 		}
-		time--;
+//		time--;
 		for(int i=0;i<N;i++) {
 			for(int j=0;j<N;j++) {
 				if(map[i][j]==0&&!v[i][j]) {
