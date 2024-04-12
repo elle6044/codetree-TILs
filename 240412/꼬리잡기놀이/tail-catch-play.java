@@ -55,14 +55,18 @@ public class Main {
 		int c=0;
 		if(dir==0) {
 			r=round%N;
+			c=0;
 		}
 		else if(dir==1) {
+			r=N-1;
 			c=round%N;
 		}
 		else if(dir==2) {
 			r=N-1-round%N;
+			c=N-1;
 		}
 		else if(dir==3) {
+			r=0;
 			c=N-1-round%N;
 		}
 		
