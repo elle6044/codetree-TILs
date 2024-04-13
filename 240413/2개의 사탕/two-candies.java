@@ -48,23 +48,20 @@ public class Main {
 	
 	static void back(int cnt, int rr, int rc, int br, int bc, char[][] map) {
 		if(cnt>10) {
-			
 			return;
 		}
-
+		
+		char[][] tmap=new char[N][M];
 		for(int d=0;d<4;d++) {
 			if(map[rr+dr[d]][rc+dc[d]]=='#'&&map[br+dr[d]][bc+dc[d]]=='#') {
 				continue;
 			}
 			
-			
-			char[][] tmap=new char[N][M];
 			for(int i=0;i<N;i++) {
 				for(int j=0;j<M;j++) {
 					tmap[i][j]=map[i][j];
 				}
 			}
-			
 			
 			int [] rl=new int[2];
 			int [] bl=new int[2];
@@ -109,15 +106,16 @@ public class Main {
 				}
 			}
 			
-			if(tmap[rl[0]][rl[1]]=='O') {
-				if(tmap[bl[0]][bl[1]]=='O') {
-					continue;
-				}
-				else {
+			if(tmap[bl[0]][bl[1]]=='O') {
+				continue;
+			}
+			else {
+				if(tmap[rl[0]][rl[1]]=='O') {
 					answer=Math.min(answer, cnt+1);
 					return;
 				}
 			}
+			
 			back(cnt+1,rl[0],rl[1],bl[0],bl[1],tmap);
 		}
 	}
@@ -135,6 +133,9 @@ public class Main {
 			if(map[nr][nc]=='#'||map[nr][nc]=='R'||map[nr][nc]=='B') {
 				nr-=dr[dir];
 				nc-=dc[dir];
+				break;
+			}
+			else if(map[nr][nc]=='O') {
 				break;
 			}
 		}
