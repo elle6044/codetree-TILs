@@ -53,7 +53,9 @@ public class Main {
 		}
 
 		for(int d=0;d<4;d++) {
-			if(map[rr+dr[d]][rc+dc[d]]=='#'&&map[br+dr[d]][bc+dc[d]]=='#') continue;
+			if(map[rr+dr[d]][rc+dc[d]]=='#'&&map[br+dr[d]][bc+dc[d]]=='#') {
+				continue;
+			}
 			
 			
 			char[][] tmap=new char[N][M];
@@ -109,7 +111,7 @@ public class Main {
 			
 			if(tmap[rl[0]][rl[1]]=='O') {
 				if(tmap[bl[0]][bl[1]]=='O') {
-					return;
+					continue;
 				}
 				else {
 					answer=Math.min(answer, cnt+1);
