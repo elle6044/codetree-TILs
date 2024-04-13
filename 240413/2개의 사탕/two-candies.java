@@ -47,7 +47,7 @@ public class Main {
 	
 	
 	static void back(int cnt, int rr, int rc, int br, int bc, char[][] map) {
-		if(cnt>10) {
+		if(cnt>=10) {
 			return;
 		}
 		
