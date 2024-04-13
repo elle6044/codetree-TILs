@@ -51,11 +51,11 @@ public class Main {
 			
 			return;
 		}
-		
-		
-		
-		
+
 		for(int d=0;d<4;d++) {
+			if(map[rr+dr[d]][rc+dc[d]]=='#'&&map[br+dr[d]][bc+dc[d]]=='#') continue;
+			
+			
 			char[][] tmap=new char[N][M];
 			for(int i=0;i<N;i++) {
 				for(int j=0;j<M;j++) {
