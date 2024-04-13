@@ -23,12 +23,16 @@ public class Main {
 			int input=Integer.parseInt(st.nextToken());
 			int t=Integer.parseInt(st.nextToken());
 			
-			while(T!=t) {
-				
-				eat();
-				T++;
+			
+			if(belts.size()>0) {
+				int cnt=(t-T)%L;
+				for(int i=0;i<cnt;i++) {
+					eat();
+					T++;
+				}
 			}
 			
+
 			if(input==100) {
 				int x=Integer.parseInt(st.nextToken());
 				String name=st.nextToken();
