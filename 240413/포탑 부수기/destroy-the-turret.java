@@ -9,7 +9,7 @@ public class Main {
 	static int[][] map;
 	static boolean[][] v;
 	
-	static PriorityQueue<Canon> canons=new PriorityQueue();
+	static PriorityQueue<Canon> canons;
 	
 
 	public static void main(String[] args) throws Exception{
@@ -17,6 +17,8 @@ public class Main {
 		N=Integer.parseInt(st.nextToken());
 		M=Integer.parseInt(st.nextToken());
 		K=Integer.parseInt(st.nextToken());
+		
+		canons=new PriorityQueue(canonComparator);
 		
 		map=new int[N][M];
 		for(int i=0;i<N;i++) {
@@ -204,7 +206,7 @@ public class Main {
 	static int[] bdr= {-1,-1,0,1,1,1,0,-1};
 	static int[] bdc= {0,1,1,1,0,-1,-1,-1};
 	
-	static class Canon implements Comparable<Canon>{
+	static class Canon{
 		int r,c,p,t;
 		public Canon(int r, int c, int p) {
 			this.r=r;
@@ -212,10 +214,7 @@ public class Main {
 			this.p=p;
 			this.t=0;
 		}
-		@Override
-		public int compareTo(Canon o) {
-			return this.p==o.p?this.t==o.t?(this.r+this.c)==(o.r+o.c)?o.c-this.c:(o.r+o.c)-(this.r+this.c):o.t-this.t:this.p-o.p;
-		}
+		
 	}
 	
 	static class Point{
@@ -227,4 +226,21 @@ public class Main {
 			this.s=new Stack();
 		}
 	}
+	
+	static Comparator<Canon> canonComparator=new Comparator<Canon>() {
+		
+		@Override
+		public int compare(Code29_2.Canon o1, Code29_2.Canon o2) {
+			if(o1.p!=o2.p) {
+				return Integer.compare(o1.p, o2.p);
+			}
+			if(o1.t!=o2.t) {
+				return Integer.compare(o2.t, o1.t);
+			}
+			if(o1.r+o1.c!=o2.r+o2.c) {
+				return Integer.compare(o2.r+o2.c, o1.r+o1.c);
+			}
+			return Integer.compare(o2.c, o1.c);
+		}
+	};
 }
