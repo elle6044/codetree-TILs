@@ -230,7 +230,7 @@ public class Main {
 	static Comparator<Canon> canonComparator=new Comparator<Canon>() {
 		
 		@Override
-		public int compare(Code29_2.Canon o1, Code29_2.Canon o2) {
+		public int compare(Canon o1, Canon o2) {
 			if(o1.p!=o2.p) {
 				return Integer.compare(o1.p, o2.p);
 			}
