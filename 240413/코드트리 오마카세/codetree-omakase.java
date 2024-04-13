@@ -23,14 +23,20 @@ public class Main {
 			int input=Integer.parseInt(st.nextToken());
 			int t=Integer.parseInt(st.nextToken());
 			
-			
-			if(belts.size()>0) {
-				int cnt=(t-T)%L;
-				for(int i=0;i<cnt;i++) {
-					eat();
-					T++;
-				}
+			int cnt=0;
+			int dif=t-T;
+			if(dif>=L) {
+				cnt=L;
 			}
+			else {
+				cnt=t-T;
+			}
+
+			for(int i=0;i<cnt;i++) {
+				eat();
+				T++;
+			}
+			T=t;
 			
 
 			if(input==100) {
@@ -47,7 +53,10 @@ public class Main {
 				}
 				belt.put(name, belt.getOrDefault(name, 0)+1);
 				belts.put(idx, belt);
+				
+				eat();
 			}
+			
 			else if(input==200) {
 				int x=Integer.parseInt(st.nextToken());
 				String name=st.nextToken();
@@ -55,11 +64,14 @@ public class Main {
 				
 				mans.put(x, name);
 				sits.put(x, n);
+				
+				eat();
 			}
 
 			else if(input==300) {
+				
 				eat();
-				T++;
+
 				int man=0;
 				int bob=0;
 				
@@ -77,12 +89,13 @@ public class Main {
 				
 				System.out.println(man+" "+bob);
 			}
+//			System.out.println("TIME : "+T);
 //			for(Map<String, Integer>belt:belts.values()) {
 //				System.out.println(belt.toString());
-//				System.out.println();
+//				
 //			}
+//			System.out.println(sits.toString());
 //			System.out.println();
-//			System.out.println("----------------------");
 		}
 	}
 	
@@ -102,11 +115,10 @@ public class Main {
 			if(remain>=toeat) {
 				belts.get(idx).put(name, remain-toeat);
 				sits.put(x, 0);
-//				mans.remove(x);
 			}
 			else {
 				belts.get(idx).put(name, 0);
-				sits.put(x, sits.get(x)-remain);
+				sits.put(x, toeat-remain);
 			}
 		}
 		
