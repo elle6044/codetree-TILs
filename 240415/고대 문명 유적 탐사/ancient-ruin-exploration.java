@@ -105,7 +105,7 @@ public class Main {
 		int[][] temp=new int[3][3];
 		for(int i=0;i<3;i++) {
 			for(int j=0;j<3;j++) {
-				for(int d=1;d<=3;d++) {
+				for(int d=1;d<=4;d++) {
 					for(int i2=0;i2<3;i2++) {
 						for(int j2=0;j2<3;j2++) {
 							temp[j2][3-1-i2]=map[i+i2][j+j2];
@@ -128,17 +128,6 @@ public class Main {
 					}
 					if(score>0) {
 						pq.offer(new Score(score,d,i,j));
-					}
-				}
-				
-				for(int i2=0;i2<3;i2++) {
-					for(int j2=0;j2<3;j2++) {
-						temp[j2][3-1-i2]=map[i+i2][j+j2];
-					}
-				}
-				for(int i2=0;i2<3;i2++) {
-					for(int j2=0;j2<3;j2++) {
-						map[i+i2][j+j2]=temp[i2][j2];
 					}
 				}
 			}
